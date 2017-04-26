@@ -10,6 +10,7 @@ gem 'uglifier'
 gem 'jquery-rails'
 gem 'pg'
 
+#Jim added
 gem 'bootstrap_form'
 gem 'bcrypt-ruby'
 
@@ -23,6 +24,12 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'rspec-rails', '2.99'
+
+  #Jim Added
+  gem 'fabrication'
+  gem 'faker'
+
+
 end
 
 group :test do

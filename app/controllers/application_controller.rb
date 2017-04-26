@@ -13,8 +13,8 @@ class ApplicationController < ActionController::Base
 
   def require_user
     if !logged_in?
-      flsah[:error] = "Must be logged in to do that"
-      redirect_to root_path
+      flash[:error] = "Must be logged in to do that"
+      redirect_to sign_in_path
     end
   end
 
