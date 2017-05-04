@@ -13,17 +13,19 @@ gem 'pg'
 #Jim added
 gem 'bootstrap_form'
 gem 'bcrypt-ruby'
+gem 'turbolinks'
 
 group :development do
   gem 'thin'
   gem "better_errors"
   gem "binding_of_caller"
+  gem 'letter_opener'
 end
 
 group :development, :test do
   gem 'pry'
   gem 'pry-nav'
-  gem 'rspec-rails', '2.99'
+  gem 'rspec-rails'   #, '2.99'
 
   #Jim Added
   gem 'fabrication'

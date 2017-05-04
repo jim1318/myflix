@@ -19,6 +19,9 @@ Category.create(name: "Murder")
 
 User.create(email: "jim@gmail.com", password: "jimjim", full_name: "Jim Finnigan")
 User.create(email: "bernie@gmail.com", password: "berniebernie", full_name: "Bernie Finnigan")
+User.create(Fabricate.attributes_for(:user))
+User.create(Fabricate.attributes_for(:user))
+User.create(Fabricate.attributes_for(:user))
 
 Review.create(review_text: "This was a great movie", rating: 5, video_id: 1, user_id: 1)
 Review.create(review_text: "This was an ok", rating: 3, video_id: 1, user_id: 1)
@@ -27,3 +30,7 @@ Review.create(review_text: "This was a pretty bad movide", rating: 2, video_id: 
 QueueItem.create(user_id: 1, video_id: 1, position: 1)
 QueueItem.create(user_id: 1, video_id: 2, position: 2)
 QueueItem.create(user_id: 1, video_id: 3, position: 3)
+
+Relationship.create(follower_id: 1, leader_id: 2)
+Relationship.create(follower_id: 1, leader_id: 3)
+Relationship.create(follower_id: 1, leader_id: 4)
