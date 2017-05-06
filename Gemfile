@@ -41,6 +41,7 @@ group :test do
   #Jim Added
   gem 'capybara'
   gem 'launchy'
+  gem 'capybara-email'
 
 end
 

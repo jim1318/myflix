@@ -10,4 +10,11 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  # tests/test_helper.rb
+  # This is for Capybara-email
+  ActionDispatch::IntegrationTest
+    Capybara.server_port = 3001
+    Capybara.app_host = 'http://localhost:3001'
+  end
 end

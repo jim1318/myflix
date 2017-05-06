@@ -3,6 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
+require 'capybara/email/rspec'
 
 #Jim Added to pull in suport files
 Dir["./spec/support/**/*.rb"].sort.each { |f| require f}
