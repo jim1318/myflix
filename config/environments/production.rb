@@ -18,6 +18,11 @@ Myflix::Application.configure do
 
   config.active_support.deprecation = :notify
 
+
+  # Don't care if the mailer can't send
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default_url_options = { host: 'https://infinite-tundra-47271.herokuapp.com' }
+
   ActionMailer::Base.smtp_settings = {
   :port           => ENV['MAILGUN_SMTP_PORT'],
   :address        => ENV['MAILGUN_SMTP_SERVER'],
