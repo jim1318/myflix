@@ -14,6 +14,8 @@ gem 'pg'
 gem 'bootstrap_form'
 gem 'bcrypt-ruby'
 gem 'turbolinks'
+gem 'fabrication'
+gem 'faker'
 
 group :development do
   gem 'thin'
@@ -27,9 +29,7 @@ group :development, :test do
   gem 'pry-nav'
   gem 'rspec-rails'   #, '2.99'
 
-  #Jim Added
-  gem 'fabrication'
-  gem 'faker'
+
 end
 
 group :test do
