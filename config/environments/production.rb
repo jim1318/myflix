@@ -33,4 +33,10 @@ Myflix::Application.configure do
   }
   ActionMailer::Base.delivery_method = :smtp
 
+  #Added for Sentry monitoring
+  Raven.configure do |config|
+    config.dsn = 'https://d32e0f7b6515448cbfc400b138552ad5:d00dc9cf922f40b9ad273838a87a1cb7@sentry.io/165816'
+  end
+
+
 end
