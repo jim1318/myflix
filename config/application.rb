@@ -15,12 +15,15 @@ module Myflix
       g.orm :active_record
       g.template_engine :haml
     end
+
+    #Added for Sentry monitoring
+    Raven.configure do |config|
+      config.dsn = 'https://d32e0f7b6515448cbfc400b138552ad5:d00dc9cf922f40b9ad273838a87a1cb7@sentry.io/165816'
+      config.attr = 'value'
+    end
+
   end
 end
 
-Raven.configure do |config|
-  config.dsn = 'https://d32e0f7b6515448cbfc400b138552ad5:d00dc9cf922f40b9ad273838a87a1cb7@sentry.io/165816'
-  config.attr = 'value'
-end
 
 
