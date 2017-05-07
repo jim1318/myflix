@@ -20,6 +20,7 @@ gem 'sidekiq', '< 5'
 gem 'sinatra', require: false
 gem 'slim'
 gem 'unicorn'
+gem "sentry-raven"                #A client and integration layer for the Sentry error reporting API.
 
 group :development do
   gem 'thin'
