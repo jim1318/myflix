@@ -10,7 +10,6 @@ class UsersController < ApplicationController
     if @user.save
       handle_invitation
       SendWelcomeEmail.perform_async(@user.id)
-      go_poop
       redirect_to sign_in_path
     else
       render :new
