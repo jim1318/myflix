@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Myflix::Application.routes.draw do
   root to: "pages#front"
 
@@ -37,6 +39,8 @@ Myflix::Application.routes.draw do
 
   resources :invitations, only: [:new, :create]
 
+  #For Sidekiq Monitoring
+  mount Sidekiq::Web, at: '/sidekiq'
 
 
 end

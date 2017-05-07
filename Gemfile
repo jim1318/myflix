@@ -16,6 +16,10 @@ gem 'bcrypt-ruby'
 gem 'turbolinks'
 gem 'fabrication'
 gem 'faker'
+gem 'sidekiq', '< 5'
+gem 'sinatra', require: false
+gem 'slim'
+gem 'unicorn'
 
 group :development do
   gem 'thin'
