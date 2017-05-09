@@ -10,6 +10,8 @@ gem 'uglifier'
 gem 'jquery-rails'
 gem 'pg'
 
+
+
 #Jim added
 gem 'bootstrap_form'
 gem 'bcrypt-ruby'
@@ -20,6 +22,8 @@ gem 'sidekiq', '< 5'
 gem 'sinatra', require: false
 gem 'slim'
 gem 'unicorn'
+gem 'bundler', '1.14.6'
+
 
 group :development do
   gem 'thin'
