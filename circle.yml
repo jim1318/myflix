@@ -1,6 +1,11 @@
 machine:
   ruby:
     version: 2.3.4
+
+dependencies:
+  pre:
+    - gem install bundler
+    
 deployment:
   production:
     branch: master
