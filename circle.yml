@@ -1,0 +1,24 @@
+machine:
+  ruby:
+    version: 2.3.4
+
+dependencies:
+  pre:
+    - gem install bundler
+    
+deployment:
+  production:
+    branch: master
+    commands:
+      - heroku maintenance:on --app infinite-tundra-47271
+      - heroku pg:backups capture --app infinite-tundra-47271
+      - git push git@heroku.com:infinite-tundra-47271.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app infinite-tundra-47271
+      - heroku maintenance:off --app infinite-tundra-47271
+  staging:
+    branch: staging
+    commands:
+      - heroku maintenance:on --app dry-peak-19377
+      - git push git@heroku.com:dry-peak-19377.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app dry-peak-19377
+      - heroku maintenance:off --app dry-peak-19377

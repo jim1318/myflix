@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.2'
+ruby '2.3.4'
 
 gem 'bootstrap-sass', '3.1.1.1'
 gem 'coffee-rails'
@@ -9,6 +9,8 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'pg'
+
+
 
 #Jim added
 gem 'bootstrap_form'
@@ -20,6 +22,8 @@ gem 'sidekiq', '< 5'
 gem 'sinatra', require: false
 gem 'slim'
 gem 'unicorn'
+gem 'bundler', '1.14.6'
+
 
 group :development do
   gem 'thin'
@@ -32,15 +36,12 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'rspec-rails'   #, '2.99'
-
-
 end
 
 group :test do
   gem 'database_cleaner', '1.4.1'
   gem 'shoulda-matchers', '2.7.0'
   gem 'vcr', '2.9.3'
-
 
   #Jim Added
   gem 'capybara'
@@ -49,7 +50,7 @@ group :test do
 
 end
 
-group :production do
+group :production, :staging do
   gem 'rails_12factor'
   gem 'sentry-raven'                #A client and integration layer for the Sentry error reporting API.
 end
