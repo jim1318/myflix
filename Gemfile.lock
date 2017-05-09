@@ -260,7 +260,7 @@ DEPENDENCIES
   vcr (= 2.9.3)
 
 RUBY VERSION
-   ruby 2.1.2p95
+   ruby 2.2.7p470
 
 BUNDLED WITH
    1.15.0.pre.3
