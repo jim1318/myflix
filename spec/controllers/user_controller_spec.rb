@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'stripe_mock'
 
 describe UsersController do
 
@@ -9,87 +10,38 @@ describe UsersController do
     end
   end
 
-  describe "POST create" do
-    context "valid input" do
-      before { post :create, user: Fabricate.attributes_for(:user) }
+  describe "POST create", :vcr do
 
-      it "creates the user" do
-        expect(User.count).to eq(1)
-      end
-
+    context "successful user signup" do
       it "redirects to the sign in page" do
+        ActionMailer::Base.deliveries.clear
+        result = double(:sign_up_result, successful?: true)
+        UserSignup.any_instance.should_receive(:sign_up).and_return(result)
+        post :create, user: Fabricate.attributes_for(:user) 
         expect(response).to redirect_to sign_in_path
       end
-
-      it "makes the user follow the inviter" do
-        alice = Fabricate(:user)
-        invitation = Fabricate(:invitation, inviter: alice, recipient_email: "joe@example.com")
-        post :create, user: { email: 'joe@example.com', password: "password", full_name: 'John Doe'}, invitation_token: invitation.token
-        joe = User.where(email: 'joe@example.com').first
-        expect(joe.follows?(alice)).to eq(true)
-      end
-
-      it "makes the inviter follow the user" do
-        alice = Fabricate(:user)
-        invitation = Fabricate(:invitation, inviter: alice, recipient_email: "joe@example.com")
-        post :create, user: { email: 'joe@example.com', password: "password", full_name: 'John Doe'}, invitation_token: invitation.token
-        joe = User.where(email: 'joe@example.com').first
-        expect(alice.follows?(joe)).to eq(true)
-      end
-
-      it "expires the invitaino upon acceptance" do
-        alice = Fabricate(:user)
-        invitation = Fabricate(:invitation, inviter: alice, recipient_email: "joe@example.com")
-        post :create, user: { email: 'joe@example.com', password: "password", full_name: 'John Doe'}, invitation_token: invitation.token
-        expect(Invitation.first.token).to be_nil
-      end
-
     end
 
-    context "with invalid input" do
-      it "does not create the user" do
-        post :create, user: { email: "jim@gmail.com", full_name: "Jim Finnigan" }
-        expect(User.count).to eq(0)
+    context "failed user signup" do
+      before do
+        result = double(:sign_up_result, successful?: false, error_message: "error message")
+        UserSignup.any_instance.should_receive(:sign_up).and_return(result)
+        post :create, user: Fabricate.attributes_for(:user)
       end
 
-      it "renders the :new template" do
-        post :create, user: { email: "jim@gmail.com", full_name: "Jim Finnigan" }
+      it "renders the new template" do
         expect(response).to render_template :new
       end
 
       it "sets @user" do
-        post :create, user: { email: "jim@gmail.com", full_name: "Jim Finnigan" }
         expect(assigns(:user)).to be_instance_of(User)
       end
-    end
 
-    context "email sending" do
-      before { ActionMailer::Base.deliveries.clear }
-      
-      it "sends out the email" do
-        post :create, user: { email: "jim@gmail.com", password: "asdfasdf", full_name: "Jim Finnigan" } 
-        expect(ActionMailer::Base.deliveries).to_not be_empty
-      end
-      
-      it "sends to the right recipient" do
-        post :create, user: { email: "jim@gmail.com", password: "asdfasdf", full_name: "Jim Finnigan" } 
-        message = ActionMailer::Base.deliveries.last 
-        expect(message.to).to eq(["jim@gmail.com"])
-      end
-      
-      it "has the right content" do
-        post :create, user: { email: "jim@gmail.com", password: "asdfasdf", full_name: "Jim Finnigan" } 
-        message = ActionMailer::Base.deliveries.last 
-        expect(message.body).to include("Welcome to MyFlix, Jim Finnigan!")
-      end
-
-      it "does not send an email with invalid inputs" do
-        post :create, user: { email: "jim@gmail.com", full_name: "Jim Finnigan" } 
-         expect(ActionMailer::Base.deliveries).to be_empty
+      it "sets the flash error message" do
+        expect(flash[:danger]).to be_present
       end
 
     end
-
   end 
 
   describe "GET show" do

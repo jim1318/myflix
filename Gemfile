@@ -1,30 +1,36 @@
 source 'https://rubygems.org'
 ruby '2.3.4'
 
-gem 'bootstrap-sass', '3.1.1.1'
-gem 'coffee-rails'
-gem 'rails', '4.1.1'
-gem 'haml-rails'
-gem 'sass-rails'
-gem 'uglifier'
-gem 'jquery-rails'
-gem 'pg'
+gem 'rails', '4.1.1'                 #RAILS TEMPLATE - Rails
+gem 'coffee-rails'                   #RAILS TEMPLATE - Use coffes scripts for assets & views
+gem 'sass-rails'                     #RAILS TEMPLATE - Use SCSS for stylesheets
+gem 'uglifier'                       #RAILS TEMPLATE - Compress javascript files
+gem 'jquery-rails'                   #RAILS TEMPLATE - Use jquery as javscript library
+gem 'turbolinks'                     #RAILS TEMPLATE - Makes navigating faster
 
+gem 'bootstrap-sass', '3.1.1.1'      #CSS - BOOTSTRAP
+gem 'haml-rails'                     #CSS - HAML
+gem 'pg'                             #SERVER - Postgress
 
 
 #Jim added
-gem 'bootstrap_form'
-gem 'bcrypt-ruby'
-gem 'turbolinks'
-gem 'fabrication'
-gem 'faker'
-gem 'sidekiq', '< 5'
-gem 'sinatra', require: false
-gem 'slim'
-gem 'unicorn'
-gem 'bundler', '1.14.6'
-gem 'carrierwave-aws'
-gem 'mini_magick'
+gem 'bootstrap_form'                #CSS - Bootstrap Forms
+gem 'slim'                          #CSS - Templateing Engine : DO WE REALLY NEED THIS????
+gem 'bcrypt-ruby'                   #PASSWORDS
+gem 'sidekiq', '< 5'                #BACKGROUND JOBS
+gem 'sinatra', require: false       #DSL - DO WE REALLY NEED THIS????????
+gem 'unicorn'                       #SERVER - multiple processes
+gem 'bundler', '1.14.6'             #ORANGIZE - Handle bundled Gems
+
+gem 'carrierwave-aws'               #UPLOAD - upload 
+gem 'mini_magick'                   #UPLOAD - manipulate images
+
+gem 'stripe'                        #PAYMENTS - STRIPE
+gem 'figaro'                        #PAYMENTS - For storing stripe ENV variables
+gem 'stripe_event'                  #PAYMENTS - For handling stripe webhooks
+
+gem 'draper'                        #Used for Decorators
+
 
 group :development do
   gem 'thin'
@@ -34,21 +40,24 @@ group :development do
 end
 
 group :development, :test do
-  gem 'pry'
-  gem 'pry-nav'
-  gem 'rspec-rails'   #, '2.99'
+  gem 'pry'                         #for prying
+  gem 'pry-nav'                     #for prying
+  gem 'rspec-rails'   #, '2.99'     #for testing
+  gem 'fabrication'                 #TESTING - fabricate objects
+  gem 'faker'                       #TESTING - fake model data
+  gem 'selenium-webdriver'          #used in testing stripe
+  gem 'capybara-webkit', '1.12.0'   #used in testing stripe
 end
 
 group :test do
   gem 'database_cleaner', '1.4.1'
   gem 'shoulda-matchers', '2.7.0'
-  gem 'vcr', '2.9.3'
-
-  #Jim Added
+  gem 'vcr'                          #for cahcing http API tests
+  gem 'webmock'                      #required for vcr
   gem 'capybara'
-  gem 'launchy'
   gem 'capybara-email'
-
+  gem 'launchy'
+  gem 'stripe-ruby-mock', '~> 2.4.1', :require => 'stripe_mock'  #mock up stripe objecst
 end
 
 group :production, :staging do

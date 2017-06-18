@@ -1,7 +1,8 @@
+%script(src="https://js.stripe.com/v3/")
 %section.register.container
   .row.justify-content-center
     .col-4
-      = bootstrap_form_for @user, html: { class: "form-horizontal"} do |f|
+      = bootstrap_form_for @user, html: { class: "form-horizontal", id: "payment-form"} do |f|
         %header
           %h1 Register
         %fieldset
@@ -9,6 +10,14 @@
           = f.password_field :password, label: "Password"
           = f.text_field :full_name, label: "Full Name"
           = hidden_field_tag :invitation_token, @invitation_token
+        %fieldset.credit_card
+          .form-group
+            %label(for="card-element")
+              Credit or debit card
+            #card-element
+              <!-- a Stripe Element will be inserted here. -->
+            #card-errors(role="alert")           
         %fieldset.actions.control-group.col-sm-offset-2
           .controls
-            %input(type="submit" value="Sign Up" class="btn btn-default")
+            %button Submit Payment
+= javascript_include_tag 'payments'

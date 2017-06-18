@@ -1,6 +1,12 @@
-require 'sidekiq/web'
+
 
 Myflix::Application.routes.draw do
+  require 'sidekiq/web'
+  #For Sidekiq Monitoring
+  mount Sidekiq::Web, at: '/sidekiq'
+  #For Stripe Webhook Events
+  mount StripeEvent::Engine, at: '/stripe_events' # provide a custom path
+
   root to: "pages#front"
 
   get 'ui(/:action)', controller: 'ui'
@@ -42,9 +48,5 @@ Myflix::Application.routes.draw do
   resources :password_resets, only: [:show, :create]
 
   resources :invitations, only: [:new, :create]
-
-  #For Sidekiq Monitoring
-  mount Sidekiq::Web, at: '/sidekiq'
-
 
 end
