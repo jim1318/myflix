@@ -57,4 +57,11 @@ describe User do
     end
   end
 
+  describe "Deactivate" do
+    it "deactivates and active user" do
+      alice = Fabricate(:user, active: true)
+      alice.deactivate!
+      expect(alice).not_to be_active
+    end
+  end
 end

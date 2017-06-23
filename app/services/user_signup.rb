@@ -25,7 +25,8 @@ class UserSignup
       end
 
       if subscription.successful?
-        @user.customer_token = customer.response.customer_token
+        @user.customer_token = customer.customer_token
+        @user.active = true
         @user.save
         handle_invitation(invitation_token)
         SendWelcomeEmail.perform_async(@user.id)

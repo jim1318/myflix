@@ -31,6 +31,9 @@ gem 'stripe_event'                  #PAYMENTS - For handling stripe webhooks
 
 gem 'draper'                        #Used for Decorators
 
+gem 'elasticsearch-model'           #SEARCH - for elastic search
+gem 'elasticsearch-rails'           #SEARCH - for elastic search
+
 
 group :development do
   gem 'thin'

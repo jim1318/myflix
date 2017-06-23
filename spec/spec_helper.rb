@@ -109,5 +109,10 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+  #Adding this for elastic search
+  config.before(:each, elasticsearch: true) do
+    Video.__elasticsearch__.create_index! force: true
+  end
+
 
 end

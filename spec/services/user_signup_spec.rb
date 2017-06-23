@@ -7,7 +7,7 @@ describe UserSignup do
       before do
         ActionMailer::Base.deliveries.clear
         customer = double('customer', customer_token: "abcdefg")
-        customer_result = double('customer_result', successful?: true, response: customer)
+        customer_result = double('customer_result', successful?: true, response: customer, customer_token: "abcdefg")
         allow(StripeWrapper::Customer).to receive(:create).and_return(customer_result)
         
         sub_result = double('result', successful?: true, response: "dummy", id: 1)

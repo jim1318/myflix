@@ -36,14 +36,13 @@ feature 'User invites friend' do
       fill_in name: 'postal', with: '90210'
     end
     click_button "Submit Payment"
-    sleep 5
   end
 
   def friend_signs_in
+    User.last.active = true  #need to mock recieving the webhook
     fill_in "Email Address", with: "john@example.com"
     fill_in "Password", with: "password"
     click_button "Sign In"
-    sleep 5
   end
 
   def friend_should_follow(user)

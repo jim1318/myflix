@@ -1,0 +1,71 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/customers
+    body:
+      encoding: UTF-8
+      string: email=test%40gmail.com&source=tok_1AXY8TLtUmfCvvw0WmI5dvRp
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.58.0
+      Authorization:
+      - Bearer sk_test_EP6KmQMbZiQ2akIbzKW7aG72
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.58.0","lang":"ruby","lang_version":"2.3.4 p301 (2017-03-30)","platform":"x86_64-darwin16","engine":"ruby","publisher":"stripe","uname":"Darwin
+        Jamess-MacBook-Pro.local 16.6.0 Darwin Kernel Version 16.6.0: Fri Apr 14 16:21:16
+        PDT 2017; root:xnu-3789.60.24~6/RELEASE_X86_64 x86_64","hostname":"Jamess-MacBook-Pro.local"}'
+      Content-Length:
+      - '58'
+      Host:
+      - api.stripe.com
+  response:
+    status:
+      code: 402
+      message: Payment Required
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Thu, 22 Jun 2017 16:26:27 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '173'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_AtKoJO1nMzeUxV
+      Stripe-Version:
+      - '2017-06-05'
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "error": {
+            "message": "Your card was declined.",
+            "type": "card_error",
+            "param": "",
+            "code": "card_declined",
+            "decline_code": "generic_decline"
+          }
+        }
+    http_version: 
+  recorded_at: Thu, 22 Jun 2017 16:26:27 GMT
+recorded_with: VCR 3.0.3
